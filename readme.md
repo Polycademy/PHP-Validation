@@ -11,9 +11,6 @@ interface than the upstream fork.
 * Introduction
 * Examples
 * Rule Reference
-* Running Tests
-* Troubleshooting
-* Changelog
 
 
 1.0 Introduction
