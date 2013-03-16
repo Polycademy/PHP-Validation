@@ -1,6 +1,7 @@
 <?php
 
 namespace Polycademy\Validation;
+use Polycademy\Validation\Rule;
 
 /**
  * Validator
@@ -37,6 +38,51 @@ class Validator {
 	 * @var array Rules
 	 **/
 	protected $rules = array();
+	
+	/**
+	 * Sets up a more concise interface for adding rules in one go
+	 *
+	 * @param array Rules Config
+	 * @return self
+	 **/
+	public function setup_rules(array $rules_config){
+		
+		foreach($rules_config as $field => $rules_array){
+		
+			//$field is the name of the input array key
+			//$rules_array is an array of values which correspond to either "set_label", ClassName or ClassName:property
+			foreach($rules_array as $rule){
+				
+				//$rule[0] is rulename, $rule[1] may exist as a parameter(s) to the rule
+				$rule = explode(':', trim($rule), 2); //only get the first occurence of ":"
+				
+				//if there are parameters, we should pass in the parameters
+				if(!empty($rule[1])){
+				
+					//if it is set_label
+					if($rule[0] == 'set_label'){
+						$this->set_label($field, $rule[1]);
+					}else{
+						$rule_parameters = explode(',', $rule[1]);
+						$obj = new \ReflectionClass('Rule\\' . $rule[0]);
+						$obj = $obj->newInstanceArgs($rule_parameters);
+						$this->add_rule($field, $obj);
+					}
+				
+				}else{
+				
+					$obj = 'Rule\\' . $rule[0];
+					$this->add_rule($field, new $obj);
+				
+				}
+			
+			}
+		
+		}
+	
+		return $this;
+	
+	}
 
 
 	/**
@@ -93,7 +139,7 @@ class Validator {
 	 **/
 	public function add_rule($field, $rule) {
 
-		if(!$rule instanceof \HybridLogic\Validation\Rule) return $this;
+		if(!$rule instanceof \Polycademy\Validation\Rule) return $this;
 
 		if(!isset($this->labels[$field])) {
 			$this->set_label($field, $this->humanize_field_name($field));
