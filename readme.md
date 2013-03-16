@@ -81,6 +81,7 @@ More detailed examples can be found in ./examples.
 * **MaxLength** Input length must be less  than or equal to value
 * **ExactLength** Input length must be exactly value
 * **Alpha** Input can only contain a-z characters
+* **AlphaSpace** Input can only contain a-z characters and whitespace
 * **AlphaNumeric** Input can contain a-z and 0-9
 * **AlphaNumericSpace** Input can contain a-z and 0-9 and whitespace
 * **AlphaSlug** Input can contain a-z, 0-9, - and _
