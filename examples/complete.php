@@ -1,9 +1,7 @@
 <?php echo '<pre>';
 
-include '../autoload.php';
-
-use HybridLogic\Validation\Validator;
-use HybridLogic\Validation\Rule;
+use Polycademy\Validation\Validator;
+use Polycademy\Validation\Rule;
 
 
 $input = array(
