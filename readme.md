@@ -2,11 +2,8 @@ Validation Library
 ==================
 
 A simple, extensible validation library for PHP with support
-for filtering and validating any input array along with
-generating client side validation code.
-
-[![Build Status](https://travis-ci.org/Dachande663/PHP-Validation.png)](https://travis-ci.org/Dachande663/PHP-Validation)
-
+for filtering and validating any input array. Provides a more concise
+interface than the upstream fork.
 
 0.0 Table of Contents
 ---------------------
@@ -32,17 +29,13 @@ adding custom rules very easy. The Validator object itself
 can be executed multiple times against different datasets,
 making it very useful for processing dynamic data.
 
-Additionally, validation rules can be generated for client
-side scripts. Currently only jQuery Validate is supplied
-but additional interfaces can be added easily.
-
 
 2.0 Examples
 ------------
 
 ```php
-use HybridLogic\Validation\Validator;
-use HybridLogic\Validation\Rule;
+use Polycademy\Validation\Validator;
+use Polycademy\Validation\Rule;
 
 $validator = new Validator();
 $validator
@@ -95,23 +88,3 @@ More detailed examples can be found in ./examples.
 * **NumMin** Input value must be greater than or equal to value
 * **NumMax** Input value must be less than or equal to value
 * **NumRange** Input value must be between min and max values
-
-
-4.0 Running Tests
------------------
-
-phpunit tests
-
-
-5.0 Troubleshooting
--------------------
-
-@todo
-
-
-6.0 Changelog
--------------
-
-* **[2012-12-08]** Initial Version
-* **[2013-01-02]** First Release
-* **[2013-01-04]** Add more Rules and additional tests
