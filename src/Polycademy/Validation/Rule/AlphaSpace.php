@@ -21,9 +21,7 @@ class AlphaSpace implements \Polycademy\Validation\Rule {
 	 **/
 	public function validate($field, $value, $validator) {
 		if(empty($value)) return true;
-		if(!ctype_alpha(str_replace(' ', '', $value))) {
-			return false;
-		}
+		return ctype_alpha(str_replace(' ', '', $value));
 	} // end func: validate
 
 

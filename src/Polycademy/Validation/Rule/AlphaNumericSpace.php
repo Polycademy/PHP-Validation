@@ -12,9 +12,7 @@ class AlphaNumericSpace implements \Polycademy\Validation\Rule {
 
 	public function validate($field, $value, $validator) {
 		if(empty($value)) return true;
-		if(!ctype_alnum(str_replace(' ', '', $value))) {
-			return false;
-		}
+		return ctype_alnum(str_replace(' ', '', $value));
 	} // end func: validate
 
 	public function get_error_message($field, $value, $validator) {
