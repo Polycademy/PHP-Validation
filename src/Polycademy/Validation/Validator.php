@@ -70,7 +70,7 @@ class Validator {
 				
 				}else{
 				
-					$obj = 'Rule\\' . $rule[0];
+					$obj = '\\Polycademy\\Validation\\Rule\\' . $rule[0];
 					$this->add_rule($field, new $obj);
 				
 				}
