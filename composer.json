@@ -1,17 +1,23 @@
 {
-	"name": "hybridlogic/validation",
-	"description": "A simple, extensible validation library for PHP with support for filtering and validating any input array along with generating client side validation code.",
+	"name": "polycademy/validation",
+	"description": "Simple Extensible Validation Library for PHP.",
 	"keywords": ["validation", "forms", "services", "models", "rules", "jquery", "client-side"],
-	"homepage": "https://github.com/Dachande663/PHP-Validation",
-	"license": "MIT",
+	"homepage": "https://github.com/Polycademy/PHP-Validation",
+	"license": "WTFPL",
 	"authors": [{
+		"name": "Roger Qiu",
+		"email": "roger.qiu@polycademy.com",
+		"homepage": "http://polycademy.com",
+		"role": "Founder and Developer"
+	},
+	{
 		"name": "Luke Lanchester",
 		"email": "luke@lukelanchester.com",
 		"homepage": "http://hybridlogic.co.uk",
 		"role": "Developer"
 	}],
 	"autoload": {
-		"psr-0": {"HybridLogic": "src/"}
+		"psr-0": {"Polycademy": "src/"}
 	},
 	"require": {
 		"php": ">=5.3.0"

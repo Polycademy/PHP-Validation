@@ -82,6 +82,7 @@ More detailed examples can be found in ./examples.
 * **ExactLength** Input length must be exactly value
 * **Alpha** Input can only contain a-z characters
 * **AlphaNumeric** Input can contain a-z and 0-9
+* **AlphaNumericSpace** Input can contain a-z and 0-9 and whitespace
 * **AlphaSlug** Input can contain a-z, 0-9, - and _
 * **Regex** Input must match provided regular expression
 * **Email** Input must be a valid email format
