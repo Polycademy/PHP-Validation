@@ -63,7 +63,7 @@ class Validator {
 						$this->set_label($field, $rule[1]);
 					}else{
 						$rule_parameters = explode(',', $rule[1]);
-						$obj = new \ReflectionClass('\Polycademy\\Validation\\Rule\\' . $rule[0]);
+						$obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $rule[0]);
 						$obj = $obj->newInstanceArgs($rule_parameters);
 						$this->add_rule($field, $obj);
 					}
