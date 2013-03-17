@@ -138,7 +138,7 @@ class Validator {
 			}
 			
 			//if the $obj was not set, we need to create a new one
-			if(!isset($obj){
+			if(!isset($obj)){
 				$obj = $this->create_rule_object($class, $params);
 				$this->rule_singletons[$class][] = array($obj, $params);
 			}
@@ -155,7 +155,7 @@ class Validator {
 			$obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $class);
 			$obj = $obj->newInstanceArgs(explode(',', $params));
 		}else{
-			$obj = '\\Polycademy\\Validation\\Rule\\' . $class
+			$obj = '\\Polycademy\\Validation\\Rule\\' . $class;
 			$obj = new $obj;
 		}
 		
