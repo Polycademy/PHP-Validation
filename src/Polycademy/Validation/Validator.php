@@ -39,6 +39,27 @@ class Validator {
 	protected $rules = array();
 	
 	/**
+	 * @var array Rule Singletons, array of rule instantiations with array($obj, $params)
+	 **/
+	protected $rule_singletons = array();
+	
+	
+		// '$class' => array(
+			// array(
+				// '$obj',
+				// '10,20',
+			// ),
+			// array(
+				// '$obj',
+				// '11,40',
+			// ),
+			// array(
+				// '$obj',
+				// false
+			// ),
+		// ),
+	
+	/**
 	 * Sets up a more concise interface for adding rules in one go
 	 *
 	 * @param array Rules Config
@@ -62,24 +83,82 @@ class Validator {
 					if($rule[0] == 'set_label'){
 						$this->set_label($field, $rule[1]);
 					}else{
-						$rule_parameters = explode(',', $rule[1]);
-						$obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $rule[0]);
-						$obj = $obj->newInstanceArgs($rule_parameters);
-						$this->add_rule($field, $obj);
+						// $rule_parameters = explode(',', $rule[1]);
+						// $obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $rule[0]);
+						// $obj = $obj->newInstanceArgs($rule_parameters);
+						$obj = $this->get_rule_singleton($rule[0], $rule[1]);
 					}
 				
 				}else{
 				
-					$obj = '\\Polycademy\\Validation\\Rule\\' . $rule[0];
-					$this->add_rule($field, new $obj);
+					//$obj = '\\Polycademy\\Validation\\Rule\\' . $rule[0];
+					$obj = $this->get_rule_singleton($rule[0]);
 				
 				}
+				
+				$this->add_rule($field, $obj);
 			
 			}
 		
 		}
 	
 		return $this;
+	
+	}
+	
+	protected function get_rule_singleton($class, $params = false){
+	
+		//if the class does not exist, we create a new one
+		//if it did, we compare the params and see if it was false, then return the same object
+		//if the params don't match and wasn't false, we create a new object again!
+		if(empty($this->rule_singletons[$class])){
+		
+			//construct a new one, if there are params through the reflection class
+			$obj = $this->create_rule_object($class, $params);
+			$this->rule_singletons[$class][] = array($obj, $params);
+			
+		}else{
+		
+			foreach($this->rule_singletons[$class] as $instance){
+			
+				//reset($instance) ==> $obj
+				//end($instance) ==> $params
+				$old_params = end($instance);
+				if($old_params == false OR ($old_params != false AND $old_params == $params)){
+					//if the old_params were empty return back the object (nothing to do)
+					//OR if the old_params were not false and that the params matched, return back the object
+					$obj = reset($instance);
+					break;
+				}else{
+					//if the params did not match iterate to the next $instance
+					continue;
+				}
+				
+			}
+			
+			//if the $obj was not set, we need to create a new one
+			if(!isset($obj){
+				$obj = $this->create_rule_object($class, $params);
+				$this->rule_singletons[$class][] = array($obj, $params);
+			}
+			
+		}
+		
+		return $obj;
+	
+	}
+	
+	protected function create_rule_object($class, $params){
+	
+		if(!empty($params)){
+			$obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $class);
+			$obj = $obj->newInstanceArgs(explode(',', $params));
+		}else{
+			$obj = '\\Polycademy\\Validation\\Rule\\' . $class
+			$obj = new $obj;
+		}
+		
+		return $obj;
 	
 	}
 
