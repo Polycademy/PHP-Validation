@@ -82,6 +82,7 @@ class Validator {
 					//if it is set_label
 					if($rule[0] == 'set_label'){
 						$this->set_label($field, $rule[1]);
+						break;
 					}else{
 						// $rule_parameters = explode(',', $rule[1]);
 						// $obj = new \ReflectionClass('\\Polycademy\\Validation\\Rule\\' . $rule[0]);
