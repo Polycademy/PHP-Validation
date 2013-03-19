@@ -104,7 +104,7 @@ $validator->setup_rules(array(
 if(!$validator->is_valid($data)){
 
 	//returns array of key for data and value
-	$errors = $this->validator->get_errors();
+	$errors = $validator->get_errors();
 	
 }
 ```
