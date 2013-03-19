@@ -56,6 +56,59 @@ if($validator->is_valid($_POST)) {
 }
 ```
 
+Or you can use the setup_rules and fluently add all the rules.
+
+```php
+use Polycademy\Validation\Validator;
+use Polycademy\Validation\Rule;
+
+$validator = new Validator();
+
+$validator->setup_rules(array(
+	'name' => array(
+		'set_label:Course Name',
+		'NotEmpty',
+		'AlphaNumericSpace',
+		'MinLength:5',
+		'MaxLength:50',
+	),
+	'starting_date' => array(
+		'set_label:Starting Date',
+		'Regex:/^(19|20)\d\d\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/',
+	),
+	'days_duration' => array(
+		'set_label:Course Duration',
+		'NotEmpty',
+		'Number',
+		'NumRange:1,200',
+	),
+	'times' => array(
+		'set_label:Course Times',
+		'NotEmpty',
+		'MinLength:1',
+		'MaxLength:100',
+		'AlphaNumericSpace',
+	),
+	'number_of_applications' => array(
+		'set_label:Number of Applicants',
+		'Number',
+		'NumRange:0,100',
+	),
+	'number_of_students' => array(
+		'set_label:Number of Students',
+		'Number',
+		'NumRange:0,100',
+	),
+));
+
+if(!$validator->is_valid($data)){
+
+	//returns array of key for data and value
+	$errors = $this->validator->get_errors();
+	
+}
+```
+
 More detailed examples can be found in ./examples.
 
 
