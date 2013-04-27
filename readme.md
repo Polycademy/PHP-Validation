@@ -11,6 +11,7 @@ interface than the upstream fork.
 * Introduction
 * Examples
 * Rule Reference
+* Installation
 
 
 1.0 Introduction
@@ -26,9 +27,15 @@ adding custom rules very easy. The Validator object itself
 can be executed multiple times against different datasets,
 making it very useful for processing dynamic data.
 
+You can easily extend this validator by simply adding more rules
+by extending "\Polycademy\Validation\Rule". Make sure to check
+out the source code!
+
 
 2.0 Examples
 ------------
+
+You can add rules and filters individually!
 
 ```php
 use Polycademy\Validation\Validator;
@@ -111,7 +118,6 @@ if(!$validator->is_valid($data)){
 
 More detailed examples can be found in ./examples.
 
-
 3.0 Rule Reference
 ------------------
 
@@ -138,3 +144,12 @@ More detailed examples can be found in ./examples.
 * **NumMin** Input value must be greater than or equal to value
 * **NumMax** Input value must be less than or equal to value
 * **NumRange** Input value must be between min and max values
+
+4.0 Installation
+------------------
+
+You can install by using Composer. Simply add this to your composer.json
+
+```
+"polycademy/validation": "*"
+```
